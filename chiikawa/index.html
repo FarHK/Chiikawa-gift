@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ちいかわとアイスの魔法</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffd9e2",
+                        "on-primary-fixed": "#2d141c",
+                        "secondary": "#206a51",
+                        "outline": "#817476",
+                        "on-tertiary-container": "#72519b",
+                        "tertiary-fixed-dim": "#dab9ff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e6e5b9",
+                        "surface-bright": "#fefccf",
+                        "inverse-primary": "#e7bbc6",
+                        "on-error": "#ffffff",
+                        "primary": "#78555e",
+                        "outline-variant": "#d3c3c5",
+                        "secondary-container": "#a9f2d1",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#7a5761",
+                        "tertiary": "#704f99",
+                        "inverse-on-surface": "#f5f3c7",
+                        "on-secondary-fixed": "#002116",
+                        "surface-container-high": "#eceabe",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#dedcb1",
+                        "surface-container": "#f2f0c4",
+                        "surface-tint": "#78555e",
+                        "on-primary-fixed-variant": "#5e3e47",
+                        "inverse-surface": "#323214",
+                        "on-secondary-fixed-variant": "#00513b",
+                        "on-tertiary-fixed-variant": "#57367f",
+                        "tertiary-container": "#ead4ff",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#e7bbc6",
+                        "on-surface-variant": "#4f4446",
+                        "tertiary-fixed": "#eedbff",
+                        "on-surface": "#1d1d03",
+                        "surface-variant": "#e6e5b9",
+                        "surface": "#fefccf",
+                        "on-background": "#1d1d03",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fefccf",
+                        "secondary-fixed-dim": "#8dd5b6",
+                        "on-secondary-container": "#287057",
+                        "secondary-fixed": "#a9f2d1",
+                        "surface-container-low": "#f8f6c9",
+                        "primary-container": "#ffd1dc",
+                        "on-tertiary-fixed": "#2a0251"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "section-gap": "64px",
+                        "gutter": "16px",
+                        "container-padding": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Quicksand"],
+                        "body-md": ["Quicksand"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "label-md": ["Quicksand"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "800"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .squish-effect:active {
+            transform: translateY(2px);
+        }
+        .cloud-shadow {
+            box-shadow: 0 8px 30px rgba(255, 209, 220, 0.4);
+        }
+        .cloud-shadow-hover:hover {
+            box-shadow: 0 12px 40px rgba(255, 209, 220, 0.6);
+            transform: translateY(-2px);
+        }
+        .inner-glow {
+            box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Floating Hearts Animation */
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(110vh) translateX(0) scale(var(--scale)) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: var(--opacity);
+            }
+            90% {
+                opacity: var(--opacity);
+            }
+            100% {
+                transform: translateY(-10vh) translateX(var(--sway)) scale(var(--scale)) rotate(var(--rot));
+                opacity: 0;
+            }
+        }
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            animation: floatHeart var(--duration) ease-in infinite;
+            animation-delay: var(--delay);
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .floating-heart {
+                animation: none !important;
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden min-h-screen flex flex-col relative">
+<!-- Floating Hearts Background Container -->
+<div aria-hidden="true" class="fixed inset-0 pointer-events-none z-[1] overflow-hidden" id="floating-hearts-container"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md transition-all duration-300">
+<div class="flex justify-between items-center px-gutter py-4 max-w-7xl mx-auto">
+<div class="font-headline-lg-mobile md:font-headline-lg text-primary tracking-tight">
+                ちいかわギフト
+            </div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-primary border-b-4 border-primary pb-1 font-body-lg transition-transform hover:scale-105" href="#">ホーム</a>
+<a class="text-on-surface-variant pb-1 font-body-lg transition-transform hover:scale-105 hover:text-primary" href="#messages">メッセージ</a>
+<a class="text-on-surface-variant pb-1 font-body-lg transition-transform hover:scale-105 hover:text-primary" href="#icecream">アイス</a>
+<a class="text-on-surface-variant pb-1 font-body-lg transition-transform hover:scale-105 hover:text-primary" href="#surprise">サプライズ</a>
+</div>
+<div class="flex gap-4 items-center">
+<button aria-label="Favorite" class="text-primary hover:scale-110 transition-transform squish-effect">
+<span class="material-symbols-outlined text-2xl">favorite</span>
+</button>
+<button aria-label="Shopping Cart" class="text-primary hover:scale-110 transition-transform squish-effect">
+<span class="material-symbols-outlined text-2xl">shopping_cart</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary-container overflow-hidden border-2 border-surface cloud-shadow">
+<img alt="ちいかわのアバター" class="w-full h-full object-cover" data-alt="A small, cute, pastel-colored avatar icon of a fluffy white character with rounded ears, a gentle smile, set against a soft pink background. High-key lighting, kawaii aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClOKWgRORVhlIPwlVrQMSRINo0qnTsqilDqT21D4AG6pjVF4MHm6jUF_1kwFYxUowgNPhcJTUypNW9KXLMQ1cENVBY9FHeEKBG6DnIYszL2aLJLYkfu-_gO08fvWSUL0wwKIwBtHVkkWV2zKBVdkqeqsK-30cZSkmXYmuoNxS5SyZDvFkaJoT3Hw0wRb1nDIHcYXoDYqLJkOzKbu1kIgFK9CtDw74ORe4PR5XfimKWMdBQHWAVEHM"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="flex-grow pt-24 pb-section-gap relative z-10">
+<!-- Hero Section -->
+<section class="relative w-full min-h-[80vh] flex items-center justify-center px-container-padding overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="ちいかわとアイスの夜空" class="w-full h-full object-cover opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoM-3oMwg3VHzpT9N9X7u-1iyL02XCzWJTnoNVSA8_rOLjRNJs0j_TDFWcko76t47rNe78fJCQyn3H8qw5CLMC1i8-UL3dafQALnYQ4FqjJWf6lz2tV8z_vPLX_-FvRSwzLhf6Gy4bh-DrQJPLiKTc2GcYgp6qV7S_zK4UKBNyRCPE01rmfx28uk2mc35zGkXP3OnN8XPOMQpuBH0Lpy64shnfqNs_DKQ1ubLWJvQXSbuKFSbNeos"/>
+<div class="absolute inset-0 bg-gradient-to-b from-surface/30 to-background/90 mix-blend-overlay"></div>
+</div>
+<div class="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center gap-8 mt-12">
+<div class="bg-surface-container-lowest/80 backdrop-blur-sm px-8 py-6 rounded-[3rem] border border-primary-fixed/50 cloud-shadow inner-glow inline-block transform hover:scale-[1.02] transition-transform duration-500">
+<h1 class="font-headline-xl text-primary drop-shadow-sm">いつもありがとう、<br/>大好きだよ！</h1>
+</div>
+<p class="font-body-lg text-on-surface-variant bg-surface-container-low/70 px-6 py-3 rounded-full backdrop-blur-sm border border-outline-variant/30">
+                    ちいかわたちと一緒に、あまい魔法をかけよう✨
+                </p>
+<a class="mt-4 bg-primary text-on-primary font-label-md px-10 py-5 rounded-full squish-effect cloud-shadow-hover border-b-[4px] border-[#5a3e45] inline-flex items-center gap-2 transition-all group" href="#messages">
+<span>メッセージを見る</span>
+<span class="material-symbols-outlined group-hover:translate-y-1 transition-transform">arrow_downward</span>
+</a>
+</div>
+</section>
+<!-- Sweet Messages Section -->
+<section class="py-section-gap px-container-padding max-w-7xl mx-auto relative z-10" id="messages">
+<div class="text-center mb-12">
+<span class="inline-block px-4 py-1 bg-secondary-container text-on-secondary-container rounded-full font-label-md mb-4 text-sm tracking-wider">Sweet Words</span>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-primary">あなたへのきもち</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-[2.5rem] p-8 cloud-shadow cloud-shadow-hover transition-all duration-300 relative border border-primary-fixed/30 overflow-hidden group">
+<div class="absolute -top-6 -right-6 w-24 h-24 bg-primary-container rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700 ease-out"></div>
+<div class="absolute top-4 right-4 text-primary">
+<span class="material-symbols-outlined text-3xl opacity-80" data-weight="fill">favorite</span>
+</div>
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center mb-6 shadow-sm">
+<span class="material-symbols-outlined text-on-primary-fixed text-2xl">sentiment_satisfied</span>
+</div>
+<h3 class="font-body-lg text-primary mb-4">あなたの笑顔が<br/>一番の幸せ</h3>
+<p class="text-on-surface-variant font-body-md leading-relaxed">
+                        いつも優しくしてくれてありがとう。一緒にいると、毎日が特別に感じます。
+                    </p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-[2.5rem] p-8 cloud-shadow cloud-shadow-hover transition-all duration-300 relative border border-secondary-fixed/30 overflow-hidden group">
+<div class="absolute -top-6 -right-6 w-24 h-24 bg-secondary-container rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700 ease-out"></div>
+<div class="absolute top-4 right-4 text-secondary">
+<span class="material-symbols-outlined text-3xl opacity-80" data-weight="fill">star</span>
+</div>
+<div class="w-16 h-16 rounded-full bg-secondary-fixed flex items-center justify-center mb-6 shadow-sm">
+<span class="material-symbols-outlined text-on-secondary-fixed text-2xl">icecream</span>
+</div>
+<h3 class="font-body-lg text-secondary mb-4">一緒にアイスを<br/>食べようね</h3>
+<p class="text-on-surface-variant font-body-md leading-relaxed">
+                        これからの季節、美味しいものをたくさん食べて、いっぱい笑い合おうね。
+                    </p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-[2.5rem] p-8 cloud-shadow cloud-shadow-hover transition-all duration-300 relative border border-tertiary-fixed/30 overflow-hidden group">
+<div class="absolute -top-6 -right-6 w-24 h-24 bg-tertiary-container rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700 ease-out"></div>
+<div class="absolute top-4 right-4 text-tertiary">
+<span class="material-symbols-outlined text-3xl opacity-80" data-weight="fill">celebration</span>
+</div>
+<div class="w-16 h-16 rounded-full bg-tertiary-fixed flex items-center justify-center mb-6 shadow-sm">
+<span class="material-symbols-outlined text-on-tertiary-fixed text-2xl">redeem</span>
+</div>
+<h3 class="font-body-lg text-tertiary mb-4">これからも<br/>ずっとよろしくね</h3>
+<p class="text-on-surface-variant font-body-md leading-relaxed">
+                        どんな時も味方でいるよ。これからもたくさんの思い出を作っていこうね。
+                    </p>
+</div>
+</div>
+</section>
+<!-- Ice Cream Favorites Section -->
+<section class="py-section-gap px-container-padding bg-surface-container/50 relative z-10" id="icecream">
+<!-- Decorative background elements -->
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+<div class="absolute top-10 left-[10%] w-32 h-32 bg-primary-fixed/40 rounded-full blur-3xl"></div>
+<div class="absolute bottom-20 right-[10%] w-48 h-48 bg-secondary-fixed/30 rounded-full blur-3xl"></div>
+</div>
+<div class="max-w-6xl mx-auto relative z-10">
+<div class="text-center mb-16">
+<span class="inline-block px-4 py-1 bg-primary-container text-on-primary-container rounded-full font-label-md mb-4 text-sm tracking-wider">Favorites</span>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-primary flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-4xl text-secondary" data-weight="fill">icecream</span>
+                        お気に入りのフレーバー
+                        <span class="material-symbols-outlined text-4xl text-primary" data-weight="fill">favorite</span>
+</h2>
+</div>
+<div class="flex flex-col md:flex-row gap-12 items-center justify-center">
+<!-- Flavor 1 -->
+<div class="w-full md:w-5/12 bg-surface-container-lowest rounded-[3rem] p-4 cloud-shadow border border-surface-variant relative group">
+<div class="absolute -top-4 -left-4 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md shadow-sm z-20 border border-secondary-fixed rotate-[-5deg]">
+                            スッキリ爽やか！
+                        </div>
+<div class="rounded-[2.5rem] overflow-hidden aspect-square relative bg-surface-variant/20 inner-glow">
+<img alt="チョコミント" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0f87GIak-WQPTabD5w4DdG5eTrOkS-BeRC31uV_UcPsnnPogc55UofZa_2CPufHZduToar7QsIZ5pMiB9DggSNbhH_PQRSpaMIPh4txxYGLD2yjyyHUVxhVkTxKhigLaKEOxfIP-EpErlwHjkPlU4lL1YCSyN_a_wZAU3cW2hdmAyX2TrDahmlHJCxsk0q7f44BtD9NBcFsWr1BoPU-V5ZNhFpyO1Qx4RCqEruM7k48W0qd4PGEU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<p class="text-white font-body-lg">チョコミント</p>
+</div>
+</div>
+<div class="mt-6 text-center pb-4">
+<h3 class="font-headline-lg-mobile text-secondary mb-2">チョコミント</h3>
+<p class="text-on-surface-variant font-body-md px-4">さわやかなミントとパリパリチョコの最高の組み合わせ！</p>
+</div>
+</div>
+<!-- Flavor 2 -->
+<div class="w-full md:w-5/12 bg-surface-container-lowest rounded-[3rem] p-4 cloud-shadow border border-surface-variant relative group md:translate-y-8">
+<div class="absolute -top-4 -right-4 bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-label-md shadow-sm z-20 border border-primary-fixed rotate-[5deg]">
+                            甘酸っぱい恋の味💕
+                        </div>
+<div class="rounded-[2.5rem] overflow-hidden aspect-square relative bg-surface-variant/20 inner-glow">
+<img alt="ラブポーション" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtB_HS7gzivsbXY_w4c_VMF0N6CXYHSFBuXmuaMVOYf29mjI89ykQ3CGIVEBV_Tfh_9h8tdUlMAo8hcuBvXcZH-_ViumWtIsEMOF2p2B2-T4X4_FQTY4tRAqDmrwcNOMH_GPcn1Btb8Tpek_IylUlos4AAk2tVIikkXLZHpI6qOp45J_9uh9iacCl-VZEbMiKYednuRA3ETincyRoVvTrdNxVUjQxDO2e9SvfZbLFdvum-Nns1qGQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<p class="text-white font-body-lg">ラブポーション</p>
+</div>
+</div>
+<div class="mt-6 text-center pb-4">
+<h3 class="font-headline-lg-mobile text-primary mb-2">ラブポーション</h3>
+<p class="text-on-surface-variant font-body-md px-4">ラズベリーとホワイトチョコのハートが可愛い、とっておきのフレーバー！</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Surprise Message Section -->
+<section class="py-section-gap px-container-padding max-w-4xl mx-auto relative z-10" id="surprise">
+<div class="bg-primary-fixed/30 rounded-[3rem] p-8 md:p-16 cloud-shadow border-4 border-white relative overflow-hidden text-center inner-glow group">
+<!-- Confetti decoration (static SVG implementation for reliable rendering) -->
+<div class="absolute inset-0 opacity-20 pointer-events-none mix-blend-multiply z-0">
+<svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+<pattern height="100" id="confetti" patternunits="userSpaceOnUse" width="100" x="0" y="0">
+<circle cx="20" cy="20" fill="#78555e" r="3"></circle>
+<rect fill="#206a51" height="6" transform="rotate(45 73 33)" width="6" x="70" y="30"></rect>
+<circle cx="50" cy="80" fill="#704f99" r="4"></circle>
+<rect fill="#78555e" height="4" transform="rotate(-30 14 72)" width="8" x="10" y="70"></rect>
+</pattern>
+<rect fill="url(#confetti)" height="100%" width="100%" x="0" y="0"></rect>
+</svg>
+</div>
+<div class="relative z-10">
+<div class="inline-flex items-center justify-center w-20 h-20 bg-surface-container-lowest rounded-full cloud-shadow mb-6 text-primary group-hover:animate-bounce">
+<span class="material-symbols-outlined text-4xl" data-weight="fill">redeem</span>
+</div>
+<h2 class="font-headline-xl text-on-primary-fixed mb-8 drop-shadow-sm">Special Surprise</h2>
+<div class="bg-white/80 backdrop-blur-md rounded-[2rem] p-8 border border-white/50 cloud-shadow text-left max-w-2xl mx-auto">
+<p class="font-body-lg text-on-surface-variant leading-loose mb-6 text-center md:text-left">
+                            いつも頑張っているあなたへ、ささやかなプレゼント。<br/>
+                            今度のお休み、二人で大好きなアイスを食べに行こうね。<br/>
+                            これからも、ずっと笑顔でいられますように！
+                        </p>
+<div class="text-right text-primary font-label-md text-lg">
+                            心を込めて。
+                        </div>
+</div>
+<button class="mt-10 bg-primary text-on-primary font-label-md px-12 py-5 rounded-full squish-effect cloud-shadow-hover border-b-[4px] border-[#5a3e45] text-lg inner-glow transition-all">
+                        プレゼントを開ける！
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-lg bg-primary-container text-on-primary-container shadow-[0_-8px_40px_rgb(255,209,220,0.4)] flex flex-col items-center gap-4 py-12 px-container-padding text-center font-body-md mt-auto z-20 relative">
+<div class="font-headline-lg text-primary mb-4">
+            ちいかわギフト
+        </div>
+<div class="flex gap-6 mb-4">
+<a class="text-on-primary-container/80 hover:opacity-80 transition-opacity hover:scale-105 font-body-md" href="#">利用規約</a>
+<a class="text-on-primary-container/80 hover:opacity-80 transition-opacity hover:scale-105 font-body-md" href="#">プライバシー</a>
+<a class="text-on-primary-container/80 hover:opacity-80 transition-opacity hover:scale-105 font-body-md" href="#">お問い合わせ</a>
+</div>
+<div class="text-on-primary-container/60 text-sm">
+            © 2024 ちいかわとアイスの魔法。大好きだよ！
+        </div>
+</footer>
+<script>
+        // Simple scroll spy for active navigation state
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                // Default to top if no section is matched (Hero)
+                if(!current && pageYOffset < sections[0].offsetTop) {
+                    current = 'top';
+                }
+
+                navLinks.forEach(link => {
+                    // Reset styling to inactive
+                    link.className = 'text-on-surface-variant pb-1 font-body-lg transition-transform hover:scale-105 hover:text-primary';
+                    
+                    const href = link.getAttribute('href');
+                    
+                    // Apply active styling
+                    if ((href === '#' && current === 'top') || href === `#${current}`) {
+                        link.className = 'text-primary border-b-4 border-primary pb-1 font-body-lg transition-transform hover:scale-105';
+                    }
+                });
+            });
+
+            // Floating Hearts Logic
+            const container = document.getElementById('floating-hearts-container');
+            if (!container) return;
+            
+            const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (isReducedMotion) return;
+
+            const heartCount = 35; 
+            const specificColors = ['#ffd9e2', '#a9f2d1', '#ffd1dc', '#8dd5b6']; // Pastel Pink and Mint Green
+
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('span');
+                heart.className = 'material-symbols-outlined floating-heart';
+                heart.setAttribute('data-weight', 'fill');
+                heart.textContent = 'favorite';
+                
+                // Randomize properties
+                const left = Math.random() * 100;
+                const size = Math.random() * 1.5 + 0.5; // 0.5 to 2.0 scale
+                const duration = Math.random() * 15 + 12; // 12s to 27s
+                const delay = Math.random() * -20; // Negative delay to start immediately scattered
+                const sway = (Math.random() - 0.5) * 120; // -60px to 60px
+                const rot = (Math.random() - 0.5) * 60; // -30deg to 30deg
+                const opacity = Math.random() * 0.4 + 0.2; // 0.2 to 0.6
+                const color = specificColors[Math.floor(Math.random() * specificColors.length)];
+
+                heart.style.left = `${left}%`;
+                heart.style.color = color;
+                heart.style.fontSize = '24px'; // Base size, scaled by CSS variable
+                
+                heart.style.setProperty('--scale', size);
+                heart.style.setProperty('--duration', `${duration}s`);
+                heart.style.setProperty('--delay', `${delay}s`);
+                heart.style.setProperty('--sway', `${sway}px`);
+                heart.style.setProperty('--rot', `${rot}deg`);
+                heart.style.setProperty('--opacity', opacity);
+
+                container.appendChild(heart);
+            }
+        });
+    </script>
+</body></html>
